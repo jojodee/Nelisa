@@ -21,26 +21,27 @@ exports.weekSales = function(filePath) {
     });
   }
 
-// console.log(dataObj);
+ // console.log(dataObj);
   return dataObj;
 };
 
-exports.processor = function(dataObj) {
-  var  mostPopProd = {};
-  console.log(dataObj);
+exports.processor = function(anObject) {
+  var productsWeeklySales = {};
+  var dataObj = exports.weekSales(anObject)
+  // console.log(dataObj);
   dataObj.forEach(function(obj) {
     var product = obj.Product;
     var quantity = Number(obj.Quantity);
 
-    if (mostPopProd[product] === undefined) {
-      mostPopProd[product] = quantity;
+    if (productsWeeklySales[product] === undefined) {
+      productsWeeklySales[product] = quantity;
     }else{
-      mostPopProd[product] += quantity;
+    productsWeeklySales[product] += quantity;
     }
   });
-  console.log(mostPopProd);
+  // console.log(productsWeeklySales);
 
-   return mostPopProd;
+   return productsWeeklySales;
 
 
 }
