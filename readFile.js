@@ -21,27 +21,78 @@ exports.weekSales = function(filePath) {
     });
   }
 
- // console.log(dataObj);
+  // console.log(dataObj);
   return dataObj;
 };
 
 exports.processor = function(anObject) {
   var productsWeeklySales = {};
   var dataObj = exports.weekSales(anObject)
-  // console.log(dataObj);
+    // console.log(dataObj);
   dataObj.forEach(function(obj) {
     var product = obj.Product;
     var quantity = Number(obj.Quantity);
 
     if (productsWeeklySales[product] === undefined) {
       productsWeeklySales[product] = quantity;
-    }else{
-    productsWeeklySales[product] += quantity;
+    } else {
+      productsWeeklySales[product] += quantity;
     }
   });
   // console.log(productsWeeklySales);
 
-   return productsWeeklySales;
+  return productsWeeklySales;
+
+
+}
+
+
+
+exports.mostPopular = function(product) {
+
+  var weeklyData = exports.processor(product)
+  var prodQty = [];
+  for (var name in weeklyData) {
+    prodQty.push(weeklyData[name]);
+  }
+  var mostPop = Math.max.apply(null, prodQty);
+  // console.log(mostPopular);
+  var popProduct = '';
+
+  for (var name in weeklyData) {
+
+    if (weeklyData[name] == mostPop) {
+      popProduct = name + ' ' + weeklyData[name];
+    }
+  }
+  // console.log(popProduct);
+   return popProduct;
+
+
+}
+
+
+
+
+exports.leastPopular = function(product) {
+
+  var weeklyData = exports.processor(product)
+  var prodQty = [];
+  for (var name in weeklyData) {
+    prodQty.push(weeklyData[name]);
+  }
+  var leastPop = Math.min.apply(null, prodQty);
+  // console.log(mostPopular);
+  var popProduct = '';
+
+  for (var name in weeklyData) {
+
+    if (weeklyData[name] == leastPop) {
+      leastPopularProduct = name + ' ' + weeklyData[name];
+    }
+  }
+  // console.log(leastPopProduct);
+   return leastPopularProduct;
 
 
 }
