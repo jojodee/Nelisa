@@ -73,6 +73,19 @@ describe('products', function(){
   })
 })
 
+
+
+describe('products catergories', function(){
+  it('should return the most pipular category', function(){
+
+
+    assert.equal("drinks", readFile.mostPopularCat('./CSV_files/week1.csv', 'utf8'))
+    assert.equal("fruits", readFile.mostPopularCat('./CSV_files/week2.csv', 'utf8'))
+    assert.equal("Shampoo 1 litre 4", readFile.mostPopularCat('./CSV_files/week3.csv', 'utf8'))
+    assert.equal("Shampoo 1 litre 13", readFile.mostPopularCat('./CSV_files/week4.csv', 'utf8'))
+  })
+})
+
 // var saleObject = readFile.weekSales('./CSV_files/week1.csv');
 //
 //
