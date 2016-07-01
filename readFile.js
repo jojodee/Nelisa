@@ -96,3 +96,10 @@ exports.leastPopular = function(product) {
 
 
 }
+
+
+
+exports.mostPopularCat = function(product){
+  var weeklyData = exports.processor(product);
+  // console.log(weeklyData);
+}
