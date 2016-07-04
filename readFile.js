@@ -39,7 +39,7 @@ exports.processor = function(anObject) {
       productsWeeklySales[product] += quantity;
     }
   });
-  // console.log(productsWeeklySales);
+  //  console.log(productsWeeklySales);
 
   return productsWeeklySales;
 
@@ -66,7 +66,7 @@ exports.mostPopular = function(product) {
     }
   }
   // console.log(popProduct);
-   return popProduct;
+  return popProduct;
 
 
 }
@@ -92,14 +92,162 @@ exports.leastPopular = function(product) {
     }
   }
   // console.log(leastPopProduct);
-   return leastPopularProduct;
+  return leastPopularProduct;
 
 
 }
 
 
 
-exports.mostPopularCat = function(product){
-  var weeklyData = exports.processor(product);
-  // console.log(weeklyData);
-}
+exports.mostPopularCat = function(product) {
+
+  var obj = exports.processor(product)
+
+    var cat = {
+      'Milk 1l': 'dairy',
+      'Imasi': 'dairy',
+      'Bread': 'bakery',
+      'Chakalaka Can': 'tinned-food',
+      'Gold Dish Vegetable Curry Can': 'tinned-food',
+      'Fanta 500ml': 'drinks',
+      'Coke 500ml': 'drinks',
+      'Cream Soda 500ml': 'drinks',
+      'Iwisa Pap 5kg': 'grains',
+      'Top Class Soy Mince': 'grains',
+      'Shampoo 1 litre': 'toiletries',
+      'Soap Bar': 'toiletries',
+      'Bananas - loose': 'fruits',
+      'Apples - loose': 'fruits',
+      'Mixed Sweets 5s': 'snacks'
+    };
+
+    categories = [];
+    for (var val in cat) {
+
+      for (var key in obj) {
+        if (key === val) {
+
+
+          categories.push(cat[val] + ':' + obj[key]);
+        }
+      }
+
+    }
+    spCat = [];
+    // console.log(categories);
+    categories.forEach(function(arr) {
+      spCat.push(arr.split(':'));
+    });
+    //console.log(spCat);
+    var totCat = {};
+
+    spCat.forEach(function(arr) {
+      var cat = arr[0];
+      var quantity = Number(arr[1]);
+      if (totCat[cat] === undefined) {
+        totCat[cat] = quantity;
+      } else {
+        totCat[cat] += quantity;
+      }
+
+    });
+
+    var prodQty = [];
+    for (var name in totCat) {
+      prodQty.push(totCat[name]);
+    }
+    var mostPop = Math.max.apply(null, prodQty);
+
+    var popCat = '';
+
+    for (var name in totCat) {
+
+      if (totCat[name] == mostPop) {
+        popCat = name + ' ' + totCat[name];
+      }
+    }
+    //  console.log(popCat);
+   return popCat;
+
+
+
+
+
+  }
+
+
+  exports.leastPopularCat = function(product) {
+
+    var obj = exports.processor(product)
+
+      var cat = {
+        'Milk 1l': 'dairy',
+        'Imasi': 'dairy',
+        'Bread': 'bakery',
+        'Chakalaka Can': 'tinned-food',
+        'Gold Dish Vegetable Curry Can': 'tinned-food',
+        'Fanta 500ml': 'drinks',
+        'Coke 500ml': 'drinks',
+        'Cream Soda 500ml': 'drinks',
+        'Iwisa Pap 5kg': 'grains',
+        'Top Class Soy Mince': 'grains',
+        'Shampoo 1 litre': 'toiletries',
+        'Soap Bar': 'toiletries',
+        'Bananas - loose': 'fruits',
+        'Apples - loose': 'fruits',
+        'Mixed Sweets 5s': 'snacks'
+      };
+
+      categories = [];
+      for (var val in cat) {
+
+        for (var key in obj) {
+          if (key === val) {
+
+
+            categories.push(cat[val] + ':' + obj[key]);
+          }
+        }
+
+      }
+      spCat = [];
+      // console.log(categories);
+      categories.forEach(function(arr) {
+        spCat.push(arr.split(':'));
+      });
+      //console.log(spCat);
+      var totCat = {};
+
+      spCat.forEach(function(arr) {
+        var cat = arr[0];
+        var quantity = Number(arr[1]);
+        if (totCat[cat] === undefined) {
+          totCat[cat] = quantity;
+        } else {
+          totCat[cat] += quantity;
+        }
+
+      });
+
+      var prodQty = [];
+      for (var name in totCat) {
+        prodQty.push(totCat[name]);
+      }
+      var leastPop = Math.min.apply(null, prodQty);
+
+      var popCat = '';
+
+      for (var name in totCat) {
+
+        if (totCat[name] == leastPop) {
+          leastPopCat = name + ' ' + totCat[name];
+        }
+      }
+      //  console.log(popCat);
+     return leastPopCat;
+
+
+
+
+
+    }
