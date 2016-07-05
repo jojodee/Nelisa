@@ -56,13 +56,13 @@ exports.mostPopular = function(product) {
     prodQty.push(weeklyData[name]);
   }
   var mostPop = Math.max.apply(null, prodQty);
-  // console.log(mostPopular);
-  var popProduct = '';
+  //  console.log(mostPop);
+  var popProduct = {};
 
   for (var name in weeklyData) {
 
     if (weeklyData[name] == mostPop) {
-      popProduct = name + ' ' + weeklyData[name];
+      popProduct = name + ':' + weeklyData[name];
     }
   }
   // console.log(popProduct);
@@ -83,12 +83,12 @@ exports.leastPopular = function(product) {
   }
   var leastPop = Math.min.apply(null, prodQty);
   // console.log(mostPopular);
-  var popProduct = '';
+  var popProduct = {};
 
   for (var name in weeklyData) {
 
     if (weeklyData[name] == leastPop) {
-      leastPopularProduct = name + ' ' + weeklyData[name];
+      leastPopularProduct = name + ':' + weeklyData[name];
     }
   }
   // console.log(leastPopProduct);
@@ -101,153 +101,181 @@ exports.leastPopular = function(product) {
 
 exports.mostPopularCat = function(product) {
 
-  var obj = exports.processor(product)
+ var obj = exports.processor(product)
 
-    var cat = {
-      'Milk 1l': 'dairy',
-      'Imasi': 'dairy',
-      'Bread': 'bakery',
-      'Chakalaka Can': 'tinned-food',
-      'Gold Dish Vegetable Curry Can': 'tinned-food',
-      'Fanta 500ml': 'drinks',
-      'Coke 500ml': 'drinks',
-      'Cream Soda 500ml': 'drinks',
-      'Iwisa Pap 5kg': 'grains',
-      'Top Class Soy Mince': 'grains',
-      'Shampoo 1 litre': 'toiletries',
-      'Soap Bar': 'toiletries',
-      'Bananas - loose': 'fruits',
-      'Apples - loose': 'fruits',
-      'Mixed Sweets 5s': 'snacks'
-    };
+  var cat = {
+    'Milk 1l': 'dairy',
+    'Imasi': 'dairy',
+    'Bread': 'bakery',
+    'Chakalaka Can': 'tinned-food',
+    'Gold Dish Vegetable Curry Can': 'tinned-food',
+    'Fanta 500ml': 'drinks',
+    'Coke 500ml': 'drinks',
+    'Cream Soda 500ml': 'drinks',
+    'Iwisa Pap 5kg': 'grains',
+    'Top Class Soy Mince': 'grains',
+    'Shampoo 1 litre': 'toiletries',
+    'Soap Bar': 'toiletries',
+    'Bananas - loose': 'fruits',
+    'Apples - loose': 'fruits',
+    'Mixed Sweets 5s': 'snacks'
+  };
 
-    categories = [];
-    for (var val in cat) {
+  categories = [];
+  for (var val in cat) {
 
-      for (var key in obj) {
-        if (key === val) {
+    for (var key in obj) {
+      if (key === val) {
 
 
-          categories.push(cat[val] + ':' + obj[key]);
-        }
-      }
-
-    }
-    spCat = [];
-    // console.log(categories);
-    categories.forEach(function(arr) {
-      spCat.push(arr.split(':'));
-    });
-    //console.log(spCat);
-    var totCat = {};
-
-    spCat.forEach(function(arr) {
-      var cat = arr[0];
-      var quantity = Number(arr[1]);
-      if (totCat[cat] === undefined) {
-        totCat[cat] = quantity;
-      } else {
-        totCat[cat] += quantity;
-      }
-
-    });
-
-    var prodQty = [];
-    for (var name in totCat) {
-      prodQty.push(totCat[name]);
-    }
-    var mostPop = Math.max.apply(null, prodQty);
-
-    var popCat = '';
-
-    for (var name in totCat) {
-
-      if (totCat[name] == mostPop) {
-        popCat = name + ' ' + totCat[name];
+        categories.push(cat[val] + ':' + obj[key]);
       }
     }
-    //  console.log(popCat);
-   return popCat;
-
-
-
-
 
   }
+  spCat = [];
+  // console.log(categories);
+  categories.forEach(function(arr) {
+    spCat.push(arr.split(':'));
+  });
+  //console.log(spCat);
+  var totCat = {};
 
-
-  exports.leastPopularCat = function(product) {
-
-    var obj = exports.processor(product)
-
-      var cat = {
-        'Milk 1l': 'dairy',
-        'Imasi': 'dairy',
-        'Bread': 'bakery',
-        'Chakalaka Can': 'tinned-food',
-        'Gold Dish Vegetable Curry Can': 'tinned-food',
-        'Fanta 500ml': 'drinks',
-        'Coke 500ml': 'drinks',
-        'Cream Soda 500ml': 'drinks',
-        'Iwisa Pap 5kg': 'grains',
-        'Top Class Soy Mince': 'grains',
-        'Shampoo 1 litre': 'toiletries',
-        'Soap Bar': 'toiletries',
-        'Bananas - loose': 'fruits',
-        'Apples - loose': 'fruits',
-        'Mixed Sweets 5s': 'snacks'
-      };
-
-      categories = [];
-      for (var val in cat) {
-
-        for (var key in obj) {
-          if (key === val) {
-
-
-            categories.push(cat[val] + ':' + obj[key]);
-          }
-        }
-
-      }
-      spCat = [];
-      // console.log(categories);
-      categories.forEach(function(arr) {
-        spCat.push(arr.split(':'));
-      });
-      //console.log(spCat);
-      var totCat = {};
-
-      spCat.forEach(function(arr) {
-        var cat = arr[0];
-        var quantity = Number(arr[1]);
-        if (totCat[cat] === undefined) {
-          totCat[cat] = quantity;
-        } else {
-          totCat[cat] += quantity;
-        }
-
-      });
-
-      var prodQty = [];
-      for (var name in totCat) {
-        prodQty.push(totCat[name]);
-      }
-      var leastPop = Math.min.apply(null, prodQty);
-
-      var popCat = '';
-
-      for (var name in totCat) {
-
-        if (totCat[name] == leastPop) {
-          leastPopCat = name + ' ' + totCat[name];
-        }
-      }
-      //  console.log(popCat);
-     return leastPopCat;
-
-
-
-
-
+  spCat.forEach(function(arr) {
+    var cat = arr[0];
+    var quantity = Number(arr[1]);
+    if (totCat[cat] === undefined) {
+      totCat[cat] = quantity;
+    } else {
+      totCat[cat] += quantity;
     }
+
+  });
+
+  var prodQty = [];
+  for (var name in totCat) {
+    prodQty.push(totCat[name]);
+  }
+  var mostPop = Math.max.apply(null, prodQty);
+
+  var popCat = {};
+
+  for (var name in totCat) {
+
+    if (totCat[name] == mostPop) {
+      popCat = name + ':' + totCat[name];
+    }
+  }
+  //  console.log(popCat);
+  return popCat;
+
+
+}
+
+
+exports.leastPopularCat = function(product) {
+
+  var obj = exports.processor(product)
+
+  var cat = {
+    'Milk 1l': 'dairy',
+    'Imasi': 'dairy',
+    'Bread': 'bakery',
+    'Chakalaka Can': 'tinned-food',
+    'Gold Dish Vegetable Curry Can': 'tinned-food',
+    'Fanta 500ml': 'drinks',
+    'Coke 500ml': 'drinks',
+    'Cream Soda 500ml': 'drinks',
+    'Iwisa Pap 5kg': 'grains',
+    'Top Class Soy Mince': 'grains',
+    'Shampoo 1 litre': 'toiletries',
+    'Soap Bar': 'toiletries',
+    'Bananas - loose': 'fruits',
+    'Apples - loose': 'fruits',
+    'Mixed Sweets 5s': 'snacks'
+  };
+
+  categories = [];
+  for (var val in cat) {
+
+    for (var key in obj) {
+      if (key === val) {
+
+
+        categories.push(cat[val] + ':' + obj[key]);
+      }
+    }
+
+  }
+  spCat = [];
+  // console.log(categories);
+  categories.forEach(function(arr) {
+    spCat.push(arr.split(':'));
+  });
+  //console.log(spCat);
+  var totCat = {};
+
+  spCat.forEach(function(arr) {
+    var cat = arr[0];
+    var quantity = Number(arr[1]);
+    if (totCat[cat] === undefined) {
+      totCat[cat] = quantity;
+    } else {
+      totCat[cat] += quantity;
+    }
+
+  });
+
+  var prodQty = [];
+  for (var name in totCat) {
+    prodQty.push(totCat[name]);
+  }
+  var leastPop = Math.min.apply(null, prodQty);
+
+  var popCat = {};
+
+  for (var name in totCat) {
+
+    if (totCat[name] == leastPop) {
+      leastPopCat = name + ':' + totCat[name];
+    }
+  }
+  //  console.log(popCat);
+  return leastPopCat;
+
+
+}
+
+
+
+// exports.reader = function(filePath) {
+//   var purchasesData = fs.readFileSync(filePath, 'utf8');
+//
+// // console.log(purchasesData);
+//
+// rawPurData = purchasesData.split('\n').splice(1).filter(Boolean);
+//
+// // console.log(rawPurData);
+// var purObj = [];
+//
+// for (var i = 0; i < rawPurData.length; i++) {
+//   rawPurData[i] = rawPurData[i].split(',');
+// console.log(rawPurData);
+//   purObj.push({
+//     Supplier: rawPurData[i][0],
+//     Date: rawPurData[i][1] + '-2016',
+//     Product: rawPurData[i][2],
+//     Quantity: Number(rawPurData[i][3]),
+//     Cost: parseInt(rawPurData[i][4]),
+//     TotalCost: parseInt(rawPurData[i][5])
+//
+//   });
+// }
+//
+//  // console.log(purObj);
+// return purObj;
+// };
+//
+//
+//
+// // return purchases;

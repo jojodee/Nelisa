@@ -51,10 +51,10 @@ describe('products', function(){
   it('return the most popular product for each week', function(){
 
 
-    assert.equal("Coke 500ml 54", readFile.mostPopular('./CSV_files/week1.csv', 'utf8'))
-    assert.equal("Mixed Sweets 5s 54", readFile.mostPopular('./CSV_files/week2.csv', 'utf8'))
-    assert.equal("Mixed Sweets 5s 29", readFile.mostPopular('./CSV_files/week3.csv', 'utf8'))
-    assert.equal("Coke 500ml 45", readFile.mostPopular('./CSV_files/week4.csv', 'utf8'))
+    assert.equal("Coke 500ml:54", readFile.mostPopular('./CSV_files/week1.csv', 'utf8'))
+    assert.equal("Mixed Sweets 5s:54", readFile.mostPopular('./CSV_files/week2.csv', 'utf8'))
+    assert.equal("Mixed Sweets 5s:29", readFile.mostPopular('./CSV_files/week3.csv', 'utf8'))
+    assert.equal("Coke 500ml:45", readFile.mostPopular('./CSV_files/week4.csv', 'utf8'))
   })
 })
 
@@ -66,87 +66,42 @@ describe('products', function(){
   it('return the least popular product for each week', function(){
 
 
-    assert.equal("Shampoo 1 litre 3", readFile.leastPopular('./CSV_files/week1.csv', 'utf8'))
-    assert.equal("Soap Bar 5", readFile.leastPopular('./CSV_files/week2.csv', 'utf8'))
-    assert.equal("Shampoo 1 litre 4", readFile.leastPopular('./CSV_files/week3.csv', 'utf8'))
-    assert.equal("Shampoo 1 litre 13", readFile.leastPopular('./CSV_files/week4.csv', 'utf8'))
+    assert.equal("Shampoo 1 litre:3", readFile.leastPopular('./CSV_files/week1.csv', 'utf8'))
+    assert.equal("Soap Bar:5", readFile.leastPopular('./CSV_files/week2.csv', 'utf8'))
+    assert.equal("Shampoo 1 litre:4", readFile.leastPopular('./CSV_files/week3.csv', 'utf8'))
+    assert.equal("Shampoo 1 litre:13", readFile.leastPopular('./CSV_files/week4.csv', 'utf8'))
   })
 })
 
 
 
 describe('products catergories', function(){
-  it('should return the most pipular category', function(){
+  it('should return the most popular category', function(){
 
 
-    assert.equal("drinks", readFile.mostPopularCat('./CSV_files/week1.csv', 'utf8'))
-    assert.equal("fruits", readFile.mostPopularCat('./CSV_files/week2.csv', 'utf8'))
-    assert.equal("Shampoo 1 litre 4", readFile.mostPopularCat('./CSV_files/week3.csv', 'utf8'))
-    assert.equal("Shampoo 1 litre 13", readFile.mostPopularCat('./CSV_files/week4.csv', 'utf8'))
+    assert.equal("drinks:109", readFile.mostPopularCat('./CSV_files/week1.csv', 'utf8'))
+    assert.equal("drinks:87", readFile.mostPopularCat('./CSV_files/week2.csv', 'utf8'))
+    assert.equal("dairy:53", readFile.mostPopularCat('./CSV_files/week3.csv', 'utf8'))
+    assert.equal("drinks:88", readFile.mostPopularCat('./CSV_files/week4.csv', 'utf8'))
   })
 })
 
-// var saleObject = readFile.weekSales('./CSV_files/week1.csv');
-//
-//
-// describe('weekly sales data', function() {
-//
-//   it(' should return length of sales array for week1', function() {
-//
-//     var result = readFile.weekSales('./CSV_files/week1.csv').length;
-//
-//     assert.deepEqual(result, 105);
-//
-//
-//   })
-//   it(' should return length of sales array for week2', function() {
-//
-//     var result = readFile.weekSales('./CSV_files/week2.csv').length;
-//
-//     assert.deepEqual(result, 117);
-//
-//
-//
-//   })
-//   it(' should return length of sales array for week3', function() {
-//
-//     var result = readFile.weekSales('./CSV_files/week3.csv').length;
-//
-//     assert.deepEqual(result, 104);
-//
-//
-//   })
-//   it(' should return length of sales array for week4', function() {
-//
-//     var result = readFile.weekSales('./CSV_files/week4.csv').length;
-//
-//     assert.deepEqual(result, 119);
-//   })
-//
-// })
-//
-//
-// describe('sales data', function(){
-//
-//   it('should return most popular product for week1', function(){
-//
-//     var saleObject = [{
-//       Product: 'Milo',
-//       Quantity: 7,
-//     },{
-//       Product: 'Peanuts',
-//       Quantity: 15,
-//     }, {
-//       Product: 'Milo',
-//       Quantity: 15,
-//     }];
-//
-//     var result = readFile.processor(saleObject)
-//
-//     assert.deepEqual(result, {
-//       Milo : 22,
-//       Peanuts : 15
-//     })
-//   })
-//
-// })
+
+describe('products catergories', function(){
+  it('should return the least popular category', function(){
+
+
+    assert.equal("toiletries:15", readFile.leastPopularCat('./CSV_files/week1.csv', 'utf8'))
+    assert.equal("toiletries:11", readFile.leastPopularCat('./CSV_files/week2.csv', 'utf8'))
+    assert.equal("toiletries:12", readFile.leastPopularCat('./CSV_files/week3.csv', 'utf8'))
+    assert.equal("bakery:33", readFile.leastPopularCat('./CSV_files/week4.csv', 'utf8'))
+  })
+})
+
+
+describe('purchases', function(){
+  it('should read the purchases csv', function(){
+
+    assert.equal(33, readFile.reader('./CSV_files/purchases.csv', 'utf8'))
+  })
+})
