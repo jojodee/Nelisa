@@ -20,8 +20,7 @@ exports.weekSales = function(filePath) {
         .replace(/R/, ""))
     });
   }
-
-  // console.log(dataObj);
+  //console.log(dataObj);
   return dataObj;
 };
 
@@ -39,7 +38,7 @@ exports.processor = function(anObject) {
       productsWeeklySales[product] += quantity;
     }
   });
-  //  console.log(productsWeeklySales);
+  // console.log(productsWeeklySales);
 
   return productsWeeklySales;
 
@@ -101,7 +100,7 @@ exports.leastPopular = function(product) {
 
 exports.mostPopularCat = function(product) {
 
- var obj = exports.processor(product)
+  var obj = exports.processor(product)
 
   var cat = {
     'Milk 1l': 'dairy',
@@ -246,6 +245,63 @@ exports.leastPopularCat = function(product) {
 
 }
 
+exports.reader = function(filePath) {
+  var purData = fs.readFileSync(filePath, 'utf8');
+
+
+  var rawData = purData.split('\n').splice(1).filter(Boolean);
+// console.log(rawData);
+  var purObj = [];
+
+  for (var i = 0; i < rawData.length; i++) {
+    rawData[i] = rawData[i].split(';');
+
+    purObj.push({
+    Supplier: rawData[i][0],
+      Date: rawData[i][1] + '-2016',
+      Product: rawData[i][2],
+      Quantity: Number(rawData[i][3]),
+      Price: parseInt(rawData[i][4]
+        .replace(/R/, "")),
+      TotalCost: parseInt(rawData[i][5]
+        .replace(/R/, ""))
+
+        
+    });
+  }
+  // console.log(purObj);
+  return purObj;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // exports.reader = function(filePath) {
@@ -255,24 +311,26 @@ exports.leastPopularCat = function(product) {
 //
 // rawPurData = purchasesData.split('\n').splice(1).filter(Boolean);
 //
-// // console.log(rawPurData);
+//
 // var purObj = [];
 //
 // for (var i = 0; i < rawPurData.length; i++) {
 //   rawPurData[i] = rawPurData[i].split(',');
-// console.log(rawPurData);
+// // console.log(rawPurData);
 //   purObj.push({
 //     Supplier: rawPurData[i][0],
 //     Date: rawPurData[i][1] + '-2016',
 //     Product: rawPurData[i][2],
 //     Quantity: Number(rawPurData[i][3]),
-//     Cost: parseInt(rawPurData[i][4]),
-//     TotalCost: parseInt(rawPurData[i][5])
+//     Cost: parseInt(rawPurData[i][4].replace(/R/,'')),
+//     TotalCost: parseInt(rawPurData[i][5].replace(/R/,''))
 //
 //   });
+//   //console.log(purObj);
 // }
 //
-//  // console.log(purObj);
+//
+// //console.log(purObj);
 // return purObj;
 // };
 //

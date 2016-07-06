@@ -100,8 +100,8 @@ describe('products catergories', function(){
 
 
 describe('purchases', function(){
-  it('should read the purchases csv', function(){
+  it('should return the length of purchases', function(){
 
-    assert.equal(33, readFile.reader('./CSV_files/purchases.csv', 'utf8'))
+    assert.equal(153, readFile.reader('./CSV_files/purchases.csv', 'utf8').length)
   })
 })
