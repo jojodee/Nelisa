@@ -247,7 +247,10 @@ exports.leastPopularCat = function(product) {
 
 exports.reader = function(filePath) {
   var purData = fs.readFileSync(filePath, 'utf8');
-
+var week1Pur = [];
+var week2Pur = [];
+var week3Pur = [];
+var week4Pur = [];
 
   var rawData = purData.split('\n').splice(1).filter(Boolean);
 // console.log(rawData);
@@ -258,7 +261,7 @@ exports.reader = function(filePath) {
 
     purObj.push({
     Supplier: rawData[i][0],
-      Date: rawData[i][1] + '-2016',
+      Date: new Date(rawData[i][1] + '-2016'),
       Product: rawData[i][2],
       Quantity: Number(rawData[i][3]),
       Price: parseInt(rawData[i][4]
@@ -266,10 +269,29 @@ exports.reader = function(filePath) {
       TotalCost: parseInt(rawData[i][5]
         .replace(/R/, ""))
 
-        
+
     });
+
+    purObj.forEach(function(obj){
+
+      if(obj.Date.getMonth() < new Date('06-Feb-2016').getMonth() ||
+       obj.Date.getDate() < new Date('06-Feb-2016').getDate() && obj.Date.getMonth() != 2 ){
+        return obj.Week = 1;
+      }else if(( obj.Date.getDate() >= new Date('06-Feb-2016').getDate()) && obj.Date.getDate()
+      < new Date('14-Feb-2016').getDate() && obj.Date.getMonth() != 2 ){
+        return obj.Week = 2;
+      }else if((obj.Date.getDate() >= new Date('14-Feb-2016').getDate()) && obj.Date.getDate()
+      < new Date('28-Feb-2016').getDate() && obj.Date.getMonth() != 2){
+      return obj.Week = 3;
+      }else{
+      return obj.Week = 4;
+
+      }
+      // console.log(week4Pur);
+
+    })
   }
-  // console.log(purObj);
+   console.log(purObj);
   return purObj;
 };
 
