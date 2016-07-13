@@ -247,10 +247,7 @@ exports.leastPopularCat = function(product) {
 
 exports.reader = function(filePath) {
   var purData = fs.readFileSync(filePath, 'utf8');
-var week1Pur = [];
-var week2Pur = [];
-var week3Pur = [];
-var week4Pur = [];
+
 
   var rawData = purData.split('\n').splice(1).filter(Boolean);
 // console.log(rawData);
@@ -294,68 +291,3 @@ var week4Pur = [];
    console.log(purObj);
   return purObj;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// exports.reader = function(filePath) {
-//   var purchasesData = fs.readFileSync(filePath, 'utf8');
-//
-// // console.log(purchasesData);
-//
-// rawPurData = purchasesData.split('\n').splice(1).filter(Boolean);
-//
-//
-// var purObj = [];
-//
-// for (var i = 0; i < rawPurData.length; i++) {
-//   rawPurData[i] = rawPurData[i].split(',');
-// // console.log(rawPurData);
-//   purObj.push({
-//     Supplier: rawPurData[i][0],
-//     Date: rawPurData[i][1] + '-2016',
-//     Product: rawPurData[i][2],
-//     Quantity: Number(rawPurData[i][3]),
-//     Cost: parseInt(rawPurData[i][4].replace(/R/,'')),
-//     TotalCost: parseInt(rawPurData[i][5].replace(/R/,''))
-//
-//   });
-//   //console.log(purObj);
-// }
-//
-//
-// //console.log(purObj);
-// return purObj;
-// };
-//
-//
-//
-// // return purchases;
