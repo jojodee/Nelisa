@@ -288,6 +288,6 @@ exports.reader = function(filePath) {
 
     })
   }
-   console.log(purObj);
+   //console.log(purObj);
   return purObj;
 };
